@@ -73,10 +73,10 @@ return $this->render('forms/contact.twig');
 ### From Source (Development)
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/Shifumi-dev/vscode-twig-open-include.git
-   cd vscode-twig-open-include
-   ```
+    ```bash
+    git clone https://github.com/c4n4r/twig-pathfinder.git
+    cd twig-pathfinder
+    ```
 
 2. Install dependencies:
    ```bash
@@ -406,7 +406,7 @@ We welcome contributions! Here's how you can help:
 
 1. Check the **Output** panel for error messages
 2. Verify the issue with a minimal test case
-3. Open an issue on [GitHub](https://github.com/Shifumi-dev/vscode-twig-open-include/issues)
+3. Open an issue on [GitHub](https://github.com/c4n4r/twig-pathfinder/issues)
 4. Include:
    - VS Code version
    - Extension version

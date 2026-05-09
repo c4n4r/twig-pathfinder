@@ -4,6 +4,10 @@
     "description": "Seamless navigation between Twig templates, Symfony routes, and PHP controllers. Click on template paths, route names, or render() calls to instantly jump to the referenced file.",
     "version": "1.0.0",
     "publisher": "Shifumi-dev",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/c4n4r/twig-pathfinder.git"
+    },
     "icon": "icon.png",
     "engines": {
         "vscode": "^1.105.0"
