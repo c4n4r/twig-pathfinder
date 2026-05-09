@@ -48,3 +48,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added comprehensive test suite for cache, filesystem, and utilities
 
 ---
+
+## Release 1.0.1
+
+### ✨ New Features
+
+- **Enhanced Twig Template Detection**: Added detection for string literals ending with `.html.twig` in PHP files, enabling navigation to template files from any PHP code that references Twig templates.
+
+---
