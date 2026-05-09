@@ -32,35 +32,39 @@ export class PhpDefinitionProvider implements vscode.DefinitionProvider {
     const line = document.lineAt(position).text;
     const before = line.slice(0, wordRange.start.character);
 
-    // Detect PHP patterns that reference Twig templates
-    // Pattern: $this->render('...')
-    // Pattern: $this->renderView('...')
-    // Pattern: return $this->render('...')
-    // Pattern: $twig->render('...')
-    if (
-      /\b(?:render|renderView)\s*\(\s*$/.test(before) ||
-      /\breturn\s+\$this\s*->\s*(?:render|renderView)\s*\(\s*$/.test(before) ||
-      /->\s*(?:render|renderView)\s*\(\s*$/.test(before)
-    ) {
-      const context: ResolveContext = {
-        document,
-        position,
-        range: wordRange,
-        text: line,
-        type: 'php',
-        action: 'render',
-        value,
-        workspaceFolder,
-        options: {},
-      };
+     // Detect PHP patterns that reference Twig templates
+     // Pattern: $this->render('...')
+     // Pattern: $this->renderView('...')
+     // Pattern: return $this->render('...')
+     // Pattern: $twig->render('...')
+     const isRenderCall = 
+       /\b(?:render|renderView)\s*\(\s*$/.test(before) ||
+       /\breturn\s+\$this\s*->\s*(?:render|renderView)\s*\(\s*$/.test(before) ||
+       /->\s*(?:render|renderView)\s*\(\s*$/.test(before);
 
-      const result = await this.resolverDispatcher.resolve(context);
-      if (result instanceof vscode.Uri) {
-        return new vscode.Location(result, new vscode.Position(0, 0));
-      }
-      return null;
-    }
+     // Also detect any string literal ending with .html.twig
+     const isTwigTemplate = value.endsWith('.html.twig');
 
-    return null;
+     if (isRenderCall || isTwigTemplate) {
+       const context: ResolveContext = {
+         document,
+         position,
+         range: wordRange,
+         text: line,
+         type: 'php',
+         action: 'render',
+         value,
+         workspaceFolder,
+         options: {},
+       };
+
+       const result = await this.resolverDispatcher.resolve(context);
+       if (result instanceof vscode.Uri) {
+         return new vscode.Location(result, new vscode.Position(0, 0));
+       }
+       return null;
+     }
+
+     return null;
   }
 }
