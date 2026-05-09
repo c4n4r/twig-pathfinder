@@ -1,13 +1,15 @@
 # Changelog
 
-All notable changes to the **Twig Open Include** VS Code extension will be documented in this file.
+All notable changes to the **Twig Pathfinder* VS Code extension will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
-## [Unreleased]
+## Release 1.0.0
+
+### Renamed to "Twig Pathfinder"
 
 ### ✨ New Features
 
@@ -46,17 +48,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added comprehensive test suite for cache, filesystem, and utilities
 
 ---
-
-## [0.0.1] - 2024-01-01
-
-### ✨ Initial Release
-
-- Basic Twig template navigation support
-- Support for `{% include %}`, `{% extends %}`, `{% embed %}`
-- Simple file search-based resolution
-- Monolithic implementation in `extension.ts`
-
----
-
-[Unreleased]: https://github.com/Shifumi-dev/vscode-twig-open-include/compare/v0.0.1...HEAD
-[0.0.1]: https://github.com/Shifumi-dev/vscode-twig-open-include/releases/tag/v0.0.1
