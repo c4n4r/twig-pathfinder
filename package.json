@@ -1,0 +1,206 @@
+{
+    "name": "vscode-twig-open-include",
+    "displayName": "Twig Pathfinder",
+    "description": "Seamless navigation between Twig templates, Symfony routes, and PHP controllers. Click on template paths, route names, or render() calls to instantly jump to the referenced file.",
+    "version": "1.0.0",
+    "publisher": "Shifumi-dev",
+    "icon": "icon.png",
+    "engines": {
+        "vscode": "^1.105.0"
+    },
+    "keywords": [
+        "twig",
+        "symfony",
+        "php",
+        "template",
+        "navigation",
+        "include",
+        "extends",
+        "embed",
+        "route",
+        "controller",
+        "jump",
+        "definition",
+        "click",
+        "go to definition"
+    ],
+    "categories": [
+        "Other"
+    ],
+    "main": "./out/extension.js",
+    "activationEvents": [
+        "onLanguage:twig",
+        "onLanguage:php"
+    ],
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p .",
+        "watch": "tsc -w -p .",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "test:coverage": "vitest run --coverage"
+    },
+    "devDependencies": {
+        "@types/minimatch": "^5.1.2",
+        "@types/node": "^20.19.40",
+        "@types/vscode": "^1.80.0",
+        "@vitest/coverage-v8": "^4.1.5",
+        "jsdom": "^29.1.1",
+        "typescript": "^5.4.0",
+        "vitest": "^4.1.5"
+    },
+    "contributes": {
+        "languages": [
+            {
+                "id": "twig",
+                "aliases": [
+                    "Twig",
+                    "twig"
+                ],
+                "extensions": [
+                    ".twig",
+                    ".html.twig"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "configuration": {
+            "title": "Twig Pathfinder",
+            "properties": {
+                "twigPathfinder.indexing.enabled": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable workspace indexing for faster resolution"
+                },
+                "twigPathfinder.indexing.eagerIndexTwig": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Eagerly index Twig templates on startup"
+                },
+                "twigPathfinder.indexing.indexRoutes": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Index Symfony routes for faster resolution"
+                },
+                "twigPathfinder.indexing.indexControllers": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Index Symfony controllers for PHP → Twig navigation"
+                },
+                "twigPathfinder.twig.templateDirectories": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "default": [
+                        "templates",
+                        ""
+                    ],
+                    "description": "Directories to search for Twig templates, in order of priority"
+                },
+                "twigPathfinder.twig.fileExtensions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "default": [
+                        ".twig"
+                    ],
+                    "description": "File extensions to recognize as Twig templates"
+                },
+                "twigPathfinder.twig.searchLimit": {
+                    "type": "number",
+                    "default": 5000,
+                    "description": "Maximum number of files to search when resolving templates that aren't in the index"
+                },
+                "twigPathfinder.symfony.routeFilePatterns": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "default": [
+                        "**/config/routes/**/*.{yaml,yml}",
+                        "**/config/routing/**/*.{yaml,yml}"
+                    ],
+                    "description": "Glob patterns for Symfony route YAML files"
+                },
+                "twigPathfinder.symfony.phpFilePatterns": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "default": [
+                        "**/*.php"
+                    ],
+                    "description": "Glob patterns for PHP files to search for route definitions"
+                },
+                "twigPathfinder.symfony.controllerPatterns": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "default": [
+                        "**/src/Controller/**/*.php",
+                        "**/src/Controller/*.php"
+                    ],
+                    "description": "Glob patterns for Symfony controller files"
+                },
+                "twigPathfinder.cache.enabled": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Master switch for all caching"
+                },
+                "twigPathfinder.cache.ttl.fileExists": {
+                    "type": "number",
+                    "default": 300000,
+                    "description": "Time-to-live for file existence cache in milliseconds"
+                },
+                "twigPathfinder.cache.ttl.fileContent": {
+                    "type": "number",
+                    "default": 300000,
+                    "description": "Time-to-live for file content cache in milliseconds"
+                },
+                "twigPathfinder.cache.ttl.resolution": {
+                    "type": "number",
+                    "default": 600000,
+                    "description": "Time-to-live for resolution cache in milliseconds"
+                },
+                "twigPathfinder.cache.maxSize": {
+                    "type": "number",
+                    "default": 1000,
+                    "description": "Maximum number of entries in each cache"
+                },
+                "twigPathfinder.watch.enabled": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to watch for file changes and update indexes automatically"
+                },
+                "twigPathfinder.watch.debounceMs": {
+                    "type": "number",
+                    "default": 500,
+                    "description": "Debounce time in milliseconds for file change events"
+                },
+                "twigPathfinder.watch.excludePatterns": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "default": [
+                        "**/{node_modules,vendor}/**"
+                    ],
+                    "description": "Glob patterns for files/directories to exclude from watching"
+                },
+                "twigPathfinder.performance.parallelResolution": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to perform parallel resolution when multiple resolvers might handle a request"
+                },
+                "twigPathfinder.performance.maxParallelOperations": {
+                    "type": "number",
+                    "default": 5,
+                    "description": "Maximum number of parallel operations"
+                }
+            }
+        }
+    }
+}
