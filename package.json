@@ -2,7 +2,7 @@
     "name": "vscode-twig-open-include",
     "displayName": "Twig Pathfinder",
     "description": "Seamless navigation between Twig templates, Symfony routes, and PHP controllers. Click on template paths, route names, or render() calls to instantly jump to the referenced file.",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "publisher": "Shifumi-dev",
     "repository": {
         "type": "git",

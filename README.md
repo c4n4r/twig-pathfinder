@@ -42,7 +42,7 @@ Navigate to Symfony route definitions from Twig:
 
 ---
 
-#### PHP → Twig Navigation ⭐ NEW!
+#### PHP → Twig Navigation
 Navigate from PHP controllers to Twig templates:
 
 ```php
@@ -59,6 +59,18 @@ return $this->render('forms/contact.twig');
 - `$twig->render('...')`
 
 ---
+
+#### PHP → Route Navigation
+
+Navigate from PHP controllers to Symfony routes:
+
+```php
+// Click on route name to navigate
+$this->redirectToRoute('app_home');
+$this->redirectToRoute('app_contact');
+```
+
+Redirect the user to the related controller.
 
 ## 📦 Installation
 

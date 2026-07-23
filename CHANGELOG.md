@@ -56,3 +56,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Enhanced Twig Template Detection**: Added detection for string literals ending with `.html.twig` in PHP files, enabling navigation to template files from any PHP code that references Twig templates.
 
 ---
+
+### Release 1.0.2
+
+### ✨ New Features
+
+- **PHP → Route Navigation**: Added support for navigating from PHP controllers to Symfony routes. Click on route names in `redirectToRoute()` and similar methods to jump directly to the related controller.
