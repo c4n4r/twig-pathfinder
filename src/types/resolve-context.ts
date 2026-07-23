@@ -9,7 +9,7 @@ export interface ResolveContext {
   range: vscode.Range;
   text: string;
   type: 'twig' | 'php' | 'yaml' | 'other';
-  action: 'include' | 'extend' | 'embed' | 'import' | 'path' | 'url' | 'render';
+  action: 'include' | 'extend' | 'embed' | 'import' | 'path' | 'url' | 'render' | 'route';
   value: string;
   workspaceFolder: vscode.WorkspaceFolder | undefined;
   options: Record<string, unknown>;

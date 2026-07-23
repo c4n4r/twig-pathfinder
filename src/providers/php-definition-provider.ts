@@ -65,6 +65,36 @@ export class PhpDefinitionProvider implements vscode.DefinitionProvider {
        return null;
      }
 
+    // Detect Symfony redirectToRoute() calls
+    // Pattern: $this->redirectToRoute('...')
+    // Pattern: Controller::redirectToRoute('...')
+    // Pattern: return $this->redirectToRoute('...')
+    const isRedirectToRouteCall = 
+      /\bredirectToRoute\s*\(\s*$/.test(before) ||
+      /\breturn\s+\$this\s*->\s*redirectToRoute\s*\(\s*$/.test(before) ||
+      /->\s*redirectToRoute\s*\(\s*$/.test(before) ||
+      /Controller::redirectToRoute\s*\(\s*$/.test(before);
+
+    if (isRedirectToRouteCall) {
+      const context: ResolveContext = {
+        document,
+        position,
+        range: wordRange,
+        text: line,
+        type: 'php',
+        action: 'route',
+        value,
+        workspaceFolder,
+        options: {},
+      };
+
+      const result = await this.resolverDispatcher.resolve(context);
+      if (result instanceof vscode.Location) {
+        return result;
+      }
+      return null;
+    }
+
      return null;
   }
 }

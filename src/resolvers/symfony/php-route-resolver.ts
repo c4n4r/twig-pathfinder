@@ -16,8 +16,9 @@ export class PhpRouteResolver implements Resolver<ResolveContext, vscode.Locatio
   ) {}
 
   canResolve(context: ResolveContext): boolean {
-    return context.type === 'twig' &&
-      (context.action === 'path' || context.action === 'url');
+    return (context.type === 'twig' &&
+      (context.action === 'path' || context.action === 'url')) ||
+      (context.type === 'php' && context.action === 'route');
   }
 
   async resolve(context: ResolveContext): Promise<vscode.Location | null> {

@@ -25,7 +25,9 @@ export class SymfonyRouteResolver implements Resolver<ResolveContext, vscode.Loc
 
   canResolve(context: ResolveContext): boolean {
     return context.type === 'twig' &&
-      (context.action === 'path' || context.action === 'url');
+      (context.action === 'path' || context.action === 'url') ||
+      context.type === 'php' &&
+      context.action === 'route';
   }
 
   async resolve(context: ResolveContext): Promise<vscode.Location | null> {
